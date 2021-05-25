@@ -2,19 +2,76 @@
 //
 
 #include <iostream>
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    int matches = 24;
+    string match = "|";
+
+    while (matches > 0)
+    {
+        cout << "Number of matches: " << matches << endl;
+        for (int i = 0; i < matches; ++i) 
+            std::cout << "|";
+        std::cout << std::endl;
+        cout << "Enter number to pick (1-3)" << endl;
+
+        int i;
+        cin >> i;
+
+        if (i > 0 && i < 4)
+        {
+            matches -= i;
+
+            if (matches < 1)
+            {
+                cout << "You lost." << endl;
+            }
+            else
+            {
+                cout << "AI turn" << endl;
+
+                if (matches == 1)
+                {
+                    matches -= 1;
+                    cout << "Number of matches removed by AI: " << 1 << endl;
+                    cout << "You won!" << endl;
+                }
+                else if (matches == 2)
+                {
+                    matches -= 1;
+                    cout << "Number of matches removed by AI: " << 1 << endl;
+                }
+
+                else if (matches == 3)
+                {
+                    matches -= 2;
+                    cout << "Number of matches removed by AI: " << 2 << endl;
+                }
+
+                else
+                {
+                    int r;
+                    r = rand() % 3 + 1;
+                    matches -= r;
+                    cout << "Number of matches removed by AI: " << r << endl;
+                }
+            }
+            
+        }
+        else
+        {
+            cout << "Invalid number." << endl;
+        }
+    }
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+/*2 Players
+24 matches on the table
+players take turns to draw matches
+may draw 1, 2 or 3 matches(not more, not less)
+player who has to take last match loses(alternatively: wins)
+make an ASCII - Art Display of the remaining matches ||||||||||||||||
+implement AI - Player :)*/
