@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+int aiTurn(int m);
+
 int main()
 {
     int matches = 24;
@@ -27,44 +29,45 @@ int main()
             if (matches < 1)
             {
                 cout << "You lost." << endl;
+                break;
             }
-            else
-            {
-                cout << "AI turn" << endl;
 
-                if (matches == 1)
-                {
-                    matches -= 1;
-                    cout << "Number of matches removed by AI: " << 1 << endl;
-                    cout << "You won!" << endl;
-                }
-                else if (matches == 2)
-                {
-                    matches -= 1;
-                    cout << "Number of matches removed by AI: " << 1 << endl;
-                }
-
-                else if (matches == 3)
-                {
-                    matches -= 2;
-                    cout << "Number of matches removed by AI: " << 2 << endl;
-                }
-
-                else
-                {
-                    int r;
-                    r = rand() % 3 + 1;
-                    matches -= r;
-                    cout << "Number of matches removed by AI: " << r << endl;
-                }
-            }
-            
+            matches = aiTurn(matches);
         }
-        else
-        {
-            cout << "Invalid number." << endl;
-        }
+        else cout << "Invalid number." << endl;
     }
+    cout << "Game over." << endl;
+}
+
+int aiTurn(int m) {
+    cout << "AI turn" << endl;
+
+    if (m == 1)
+    {
+        m -= 1;
+        cout << "Number of matches removed by AI: " << 1 << endl;
+        cout << "You won!" << endl;
+    }
+    else if (m == 2) 
+    {
+        m -= 1;
+        cout << "Number of matches removed by AI: " << 1 << endl;
+    }
+        
+    else if (m == 3) 
+    {
+        m -= 2;
+        cout << "Number of matches removed by AI: " << 2 << endl;
+    }
+        
+    else 
+    {
+        int r;
+        r = rand() % 3 + 1;
+        cout << "Number of matches removed by AI: " << r << endl;
+        m -= r;
+    }
+    return m;
 }
 
 
