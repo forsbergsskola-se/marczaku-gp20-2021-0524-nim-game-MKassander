@@ -3,14 +3,12 @@ using namespace std;
 
 int main()
 {
-    string player1Symbol = "X";
-    string player2Symbol = "O";
+    string player1 = "X";
+    string player2 = "O";
 
     string squares[9] = {"?", "?", "?", "?", "?", "?", "?", "?", "?"};
 
     std::cout << "Welcome to TicTacToe!\n";
-
-    
 
     while (true)
     {
@@ -22,10 +20,28 @@ int main()
         int response;
         cin >> response;
         if (squares[response] == "?") {
-            squares[response] = player1Symbol;
+            squares[response] = player1;
+
+            if (squares[0] == player1 && squares[1] == player1 && squares[2] == player1 || 
+                squares[3] == player1 && squares[4] == player1 && squares[5] == player1 ||
+                squares[6] == player1 && squares[7] == player1 && squares[8] == player1 ||
+
+                squares[0] == player1 && squares[3] == player1 && squares[6] == player1 ||
+                squares[1] == player1 && squares[4] == player1 && squares[7] == player1 ||
+                squares[2] == player1 && squares[5] == player1 && squares[8] == player1 ||
+
+                squares[0] == player1 && squares[4] == player1 && squares[8] == player1 ||
+                squares[2] == player1 && squares[4] == player1 && squares[6] == player1)
+            {
+                cout << "You win!" << endl;
+            }
         }
         else cout << "Occupied space, try again" << endl;
     }
+}
+
+void takeTurn(string player) {
+
 }
 
 /*
