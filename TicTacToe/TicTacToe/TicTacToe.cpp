@@ -41,6 +41,12 @@ bool takeTurn(string player, string squares[9]) {
     return false;
 }
 
+void printField(string squares[9]) {
+    cout << squares[0] << " " << squares[1] << " " << squares[2] << endl;
+    cout << squares[3] << " " << squares[4] << " " << squares[5] << endl;
+    cout << squares[6] << " " << squares[7] << " " << squares[8] << endl;
+}
+
 int main()
 {
     string player1 = "X";
@@ -54,9 +60,7 @@ int main()
 
     while (!gameOver)
     {
-        cout << squares[0] << " " << squares[1] << " " << squares[2] << endl;
-        cout << squares[3] << " " << squares[4] << " " << squares[5] << endl;
-        cout << squares[6] << " " << squares[7] << " " << squares[8] << endl;
+        printField(squares);
 
         switch (player1Turn)
         {
@@ -70,6 +74,7 @@ int main()
         if (!spacesLeft(squares)) break;
         player1Turn = !player1Turn;
     }
+    printField(squares);
     cout << "Game over" << endl;
 }
 
