@@ -1,7 +1,19 @@
 #include <iostream>
 using namespace std;
 
-void takeTurn(string player, string squares[9]) {
+bool spacesLeft(string squares[9]) {
+    int index = 0;
+    while (true) {
+        if (squares[index] == "?")
+            return true;
+        if (index == 8)
+            return false;
+        index++;
+    }
+}
+
+bool takeTurn(string player, string squares[9]) {
+
     cout << player << "'s turn" << endl;
     cout << "Enter a numer (0-8) to place your pawn" << endl;
     int response;
@@ -20,10 +32,13 @@ void takeTurn(string player, string squares[9]) {
             squares[0] == player && squares[4] == player && squares[8] == player ||
             squares[2] == player && squares[4] == player && squares[6] == player)
         {
-            cout << "You win!" << endl;
+            cout << player << " wins!" << endl;
+            return true;
         }
+        return false;
     }
     else cout << "Occupied space, try again" << endl;
+    return false;
 }
 
 int main()
@@ -31,12 +46,13 @@ int main()
     string player1 = "X";
     string player2 = "O";
     bool player1Turn = true;
+    bool gameOver = false;
 
     string squares[9] = {"?", "?", "?", "?", "?", "?", "?", "?", "?"};
 
     std::cout << "Welcome to TicTacToe!\n";
 
-    while (true)
+    while (!gameOver)
     {
         cout << squares[0] << " " << squares[1] << " " << squares[2] << endl;
         cout << squares[3] << " " << squares[4] << " " << squares[5] << endl;
@@ -45,14 +61,16 @@ int main()
         switch (player1Turn)
         {
         case true:
-            takeTurn(player1, squares);
+            gameOver = takeTurn(player1, squares);
             break;
         case false:
-            takeTurn(player2, squares);
+            gameOver = takeTurn(player2, squares);
             break;
         }
+        if (!spacesLeft(squares)) break;
         player1Turn = !player1Turn;
     }
+    cout << "Game over" << endl;
 }
 
 
