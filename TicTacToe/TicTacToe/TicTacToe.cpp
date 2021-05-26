@@ -13,11 +13,26 @@ bool spacesLeft(string squares[9]) {
 }
 
 bool takeTurn(string player, string squares[9]) {
-
     cout << player << "'s turn" << endl;
-    cout << "Enter a numer (0-8) to place your pawn" << endl;
-    int response;
-    cin >> response;
+    int response = 0;
+    if (player == "O")
+    {
+        int r;
+        while (true) {
+            r = rand() % 8 + 0;
+            if (squares[r] == "?")
+            {
+                response = r;
+                cout << player << " chose number " << r << endl;
+                break;
+            }
+        }
+    }
+    else {
+        cout << "Enter a numer (0-8) to place your pawn" << endl;
+        cin >> response;
+    }
+    
     if (squares[response] == "?") {
         squares[response] = player;
 
@@ -71,7 +86,10 @@ int main()
             gameOver = takeTurn(player2, squares);
             break;
         }
-        if (!spacesLeft(squares)) break;
+        if (!spacesLeft(squares)) {
+            cout << "Draw" << endl;
+            break;
+        }
         player1Turn = !player1Turn;
     }
     printField(squares);
