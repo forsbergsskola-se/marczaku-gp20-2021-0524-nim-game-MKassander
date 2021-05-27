@@ -4,6 +4,45 @@ using namespace std;
 const int NumberOfBits = 32;
 int bits[NumberOfBits];
 
+void normalConvert(unsigned response) {
+    int i = 0;
+    while (response > 0) {
+        bits[i] = response % 2;
+        response /= 2;
+        i++;
+    }
+
+    cout << "0b ";
+    int space = 4;
+    for (int x = NumberOfBits - 1; x >= 0; x--) {
+        cout << bits[x];
+        --space;
+        if (space == 0) {
+            cout << " ";
+            space = 4;
+        }
+    }
+
+    cout << endl;
+}
+
+void binaryOperatorConvert(unsigned response) {
+    cout << "0b ";
+    int space = 4;
+    for (int i = NumberOfBits - 1; i >= 0; i--)
+    {
+        int shift = response >> i;
+        if (shift & 1) cout << "1";
+        else cout << "0";
+        --space;
+        if (space == 0) {
+            cout << " ";
+            space = 4;
+        }
+    }
+    cout << endl;
+}
+
 int main()
 {
     cout << "Welcome to my binary converter!" << endl;
@@ -15,26 +54,15 @@ int main()
         if (response < 0)
             cout << response << " is a negative number" << endl;
         else {
-            int i = 0;
-            while (response > 0) {
-                bits[i] = response % 2;
-                response /= 2;
-                i++;
-            }
-
-            cout << "0b ";
-            int space = 4;
-            for (int x = NumberOfBits - 1; x >= 0; x--) {
-                cout << bits[x];
-                --space;
-                if (space == 0) {
-                    cout << " ";
-                    space = 4;
-                }
-            }
-                
-            cout << endl;
-            }
+            cout << "Enter 1 to use binary operators version, or other for normal:" << endl;
+            int option;
+            cin >> option;
+            if (option == 1)
+                binaryOperatorConvert(response);
+            else
+                normalConvert(response);
+        }
+            
     }
 }
 
